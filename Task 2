@@ -1,0 +1,153 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class calcu extends JFrame implements ActionListener {
+    // Create frame
+    private JFrame frame;
+
+    // Create text field
+    private JTextField textField;
+
+    // Store operator and operands
+    private String operator;
+    private double num1, num2, result;
+
+    // Create buttons
+    private JButton[] numberButtons;
+    private JButton[] functionButtons;
+    private JButton addButton, subButton, mulButton, divButton, equButton, delButton, clrButton, decButton;
+
+    // Constructor
+    public calcu() {
+        // Create frame
+        frame = new JFrame("Calculator");
+        textField = new JTextField();
+        numberButtons = new JButton[10];
+        functionButtons = new JButton[4];
+
+        // Create buttons
+        addButton = new JButton("+");
+        subButton = new JButton("-");
+        mulButton = new JButton("*");
+        divButton = new JButton("/");
+
+        equButton = new JButton("=");
+        delButton = new JButton("Del");
+        clrButton = new JButton("Clear");
+        decButton = new JButton(".");
+
+        // Add ActionListeners
+        addButton.addActionListener(this);
+        subButton.addActionListener(this);
+        mulButton.addActionListener(this);
+        divButton.addActionListener(this);
+        equButton.addActionListener(this);
+        delButton.addActionListener(this);
+        clrButton.addActionListener(this);
+        decButton.addActionListener(this);
+
+        // Create number buttons
+        for (int i = 0; i < 10; i++) {
+            numberButtons[i] = new JButton(String.valueOf(i));
+            numberButtons[i].addActionListener(this);
+        }
+
+        // Create panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 4, 10, 10));
+
+        // Add buttons to panel
+        panel.add(numberButtons[1]);
+        panel.add(numberButtons[2]);
+        panel.add(numberButtons[3]);
+        panel.add(addButton);
+
+        panel.add(numberButtons[4]);
+        panel.add(numberButtons[5]);
+        panel.add(numberButtons[6]);
+        panel.add(subButton);
+
+        panel.add(numberButtons[7]);
+        panel.add(numberButtons[8]);
+        panel.add(numberButtons[9]);
+        panel.add(mulButton);
+
+        panel.add(decButton);
+        panel.add(numberButtons[0]);
+        panel.add(equButton);
+        panel.add(divButton);
+
+        // Set up frame
+        frame.add(textField, BorderLayout.NORTH);
+        frame.add(panel);
+        frame.setSize(400, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    // Implement actionPerformed method
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
+
+        // Handle number buttons
+        for (int i = 0; i < 10; i++) {
+            if (command.equals(String.valueOf(i))) {
+                textField.setText(textField.getText() + command);
+                return;
+            }
+        }
+
+        // Handle operator buttons
+        if (command.equals("+")) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = "+";
+            textField.setText("");
+        } else if (command.equals("-")) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = "-";
+            textField.setText("");
+        } else if (command.equals("*")) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = "*";
+            textField.setText("");
+        } else if (command.equals("/")) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = "/";
+            textField.setText("");
+        } else if (command.equals("=")) {
+            num2 = Double.parseDouble(textField.getText());
+            switch (operator) {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    result = num1 / num2;
+                    break;
+            }
+            textField.setText(String.valueOf(result));
+            operator = "";
+        } else if (command.equals("Clear")) {
+            textField.setText("");
+            operator = "";
+        } else if (command.equals("Del")) {
+            String text = textField.getText();
+            textField.setText(text.substring(0, text.length() - 1));
+        } else if (command.equals(".")) {
+            textField.setText(textField.getText() + ".");
+        }
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        new calcu();
+    }
+}
