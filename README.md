@@ -6,6 +6,10 @@ Duration: September to October 2024
 
 ### **Calculator Project - Overview**
 
+### **Preview**
+![Screenshot 2024-10-24 153236](https://github.com/user-attachments/assets/e3549652-3787-477d-aafa-2bee97181a6a)
+
+
 #### **Project Introduction**
 The Calculator Project is a basic GUI-based Java application that allows users to perform simple arithmetic operations like addition, subtraction, multiplication, and division. The graphical user interface (GUI) is built using Java Swing, and it includes a text field for displaying the inputs and outputs, along with buttons representing numbers, operators, and other control functions (e.g., clear and delete). The calculator performs basic math calculations between two operands and displays the result in real-time.
 
